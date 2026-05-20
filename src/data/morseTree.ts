@@ -42,7 +42,8 @@ const NODE_DEFS: NodeDef[] = [
   // Column 2  (x=90)
   { letter: 'M', code: '--',   x: 90,  y: 90,  ledType: 'rect-h', dotChild: 'G', dashChild: 'O' },
   { letter: 'G', code: '--.',  x: 90,  y: 155, ledType: 'circle',  dotChild: 'Z', dashChild: 'Q' },
-  { letter: 'Z', code: '--..',  x: 90,  y: 220, ledType: 'circle' },
+  { letter: 'Z',   code: '--..',  x: 90,  y: 220, ledType: 'circle',  dashChild: 'SPC' },
+  { letter: 'SPC', code: '--..-', x: 35,  y: 220, ledType: 'rect-h' },
   { letter: 'K', code: '-.-',  x: 90,  y: 285, ledType: 'rect-h', dotChild: 'C', dashChild: 'Y' },
   { letter: 'C', code: '-.-.',  x: 90,  y: 350, ledType: 'circle' },
   { letter: 'X', code: '-..-', x: 90,  y: 415, ledType: 'rect-h' },
@@ -71,8 +72,8 @@ const NODE_DEFS: NodeDef[] = [
   { letter: 'V', code: '...-', x: 358, y: 155, ledType: 'rect-h' },
   { letter: 'L', code: '.-..',  x: 358, y: 285, ledType: 'circle' },
 
-  // Column 7  (x=390)
-  { letter: 'H', code: '....', x: 390, y: 90,  ledType: 'circle' },
+  // Column 7  (x=382 — pulled in to stay within board border)
+  { letter: 'H', code: '....', x: 382, y: 90,  ledType: 'circle' },
 ]
 
 // Build node map
@@ -118,6 +119,9 @@ export const TRACES: TraceData[] = [
   { id: 'G-Z', points: [[90,155],[90,220]],  childLetter: 'Z' },   // dot  → down
   { id: 'G-Q', points: [[90,155],[35,155]],  childLetter: 'Q' },   // dash → left
 
+  // Z (col2 row3)
+  { id: 'Z-SPC', points: [[90,220],[35,220]], childLetter: 'SPC' }, // dash → left
+
   // N (col3 row4)
   { id: 'N-D', points: [[148,285],[148,415]], childLetter: 'D' },  // dot  → down
   { id: 'N-K', points: [[148,285],[90,285]],  childLetter: 'K' },  // dash → left
@@ -139,7 +143,7 @@ export const TRACES: TraceData[] = [
   { id: 'I-U', points: [[308,90],[308,155]], childLetter: 'U' },   // dash → down
 
   // S (col6 row1)
-  { id: 'S-H', points: [[358,90],[390,90]],  childLetter: 'H' },   // dot  → right
+  { id: 'S-H', points: [[358,90],[382,90]],  childLetter: 'H' },   // dot  → right
   { id: 'S-V', points: [[358,90],[358,155]], childLetter: 'V' },   // dash → down
 
   // U (col5 row2)

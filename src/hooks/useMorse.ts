@@ -29,10 +29,18 @@ export function useMorse() {
   const addSymbol = useCallback((symbol: '.' | '-') => {
     clearTimer()
 
-    setState(prev => {
-      const newSeq = prev.sequence + symbol
-      return { ...prev, sequence: newSeq, isConfirmed: false }
-    })
+    // Cancel any pending confirm-clear timer so it cannot wipe the new sequence
+    if (confirmTimerRef.current !== null) {
+      clearTimeout(confirmTimerRef.current)
+      confirmTimerRef.current = null
+    }
+
+    setState(prev => ({
+      // Start fresh after a confirmed letter; otherwise append
+      sequence: (prev.isConfirmed ? '' : prev.sequence) + symbol,
+      confirmedLetter: '',
+      isConfirmed: false,
+    }))
 
     // Start letter-timeout
     timerRef.current = setTimeout(() => {
