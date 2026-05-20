@@ -19,7 +19,7 @@ export default function App() {
     stopTone()
   }, [stopTone])
 
-  const { onButtonDown, onButtonUp } = useMorseInput({
+  const { onPointerDown, onPointerUp, onPointerCancel, onPointerLeave } = useMorseInput({
     onDot: () => addSymbol('.'),
     onDash: () => addSymbol('-'),
     onPressStart: handlePressStart,
@@ -34,10 +34,10 @@ export default function App() {
         confirmedLetter={confirmedLetter}
         isConfirmed={isConfirmed}
         isPressed={isPressed}
-        onTouchStart={e => onButtonDown(e)}
-        onTouchEnd={e => onButtonUp(e)}
-        onMouseDown={e => onButtonDown(e)}
-        onMouseUp={e => onButtonUp(e)}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerCancel}
+        onPointerLeave={onPointerLeave}
       />
     </div>
   )

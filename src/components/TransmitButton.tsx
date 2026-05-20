@@ -3,10 +3,10 @@ interface TransmitButtonProps {
   cx: number
   cy: number
   r: number
-  onTouchStart: (e: React.TouchEvent) => void
-  onTouchEnd: (e: React.TouchEvent) => void
-  onMouseDown: (e: React.MouseEvent) => void
-  onMouseUp: (e: React.MouseEvent) => void
+  onPointerDown: (e: React.PointerEvent) => void
+  onPointerUp: (e: React.PointerEvent) => void
+  onPointerCancel: (e: React.PointerEvent) => void
+  onPointerLeave: (e: React.PointerEvent) => void
 }
 
 export function TransmitButton({
@@ -14,21 +14,27 @@ export function TransmitButton({
   cx,
   cy,
   r,
-  onTouchStart,
-  onTouchEnd,
-  onMouseDown,
-  onMouseUp,
+  onPointerDown,
+  onPointerUp,
+  onPointerCancel,
+  onPointerLeave,
 }: TransmitButtonProps) {
   const scale = isPressed ? 0.95 : 1
   return (
     <g
       transform={`translate(${cx},${cy}) scale(${scale}) translate(${-cx},${-cy})`}
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
-      onMouseDown={onMouseDown}
-      onMouseUp={onMouseUp}
+      onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerCancel}
+      onPointerLeave={onPointerLeave}
       pointerEvents="all"
-      style={{ cursor: 'pointer' }}
+      style={{
+        cursor: 'pointer',
+        touchAction: 'none',
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        WebkitTouchCallout: 'none',
+      }}
     >
       {/* Outer ring */}
       <circle cx={cx} cy={cy} r={r + 4} fill="none" stroke="#c8941a" strokeWidth="1.5" strokeOpacity="0.5" />

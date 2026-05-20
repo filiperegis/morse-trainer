@@ -10,10 +10,10 @@ interface MorseBoardProps {
   confirmedLetter: string
   isConfirmed: boolean
   isPressed: boolean
-  onTouchStart: (e: React.TouchEvent) => void
-  onTouchEnd: (e: React.TouchEvent) => void
-  onMouseDown: (e: React.MouseEvent) => void
-  onMouseUp: (e: React.MouseEvent) => void
+  onPointerDown: (e: React.PointerEvent) => void
+  onPointerUp: (e: React.PointerEvent) => void
+  onPointerCancel: (e: React.PointerEvent) => void
+  onPointerLeave: (e: React.PointerEvent) => void
 }
 
 const VIEW_W = 400
@@ -27,10 +27,10 @@ export function MorseBoard({
   confirmedLetter,
   isConfirmed,
   isPressed,
-  onTouchStart,
-  onTouchEnd,
-  onMouseDown,
-  onMouseUp,
+  onPointerDown,
+  onPointerUp,
+  onPointerCancel,
+  onPointerLeave,
 }: MorseBoardProps) {
   const activePath = new Set(getActivePath(sequence))
   const activeTraceIds = getActiveTraces(sequence)
@@ -167,10 +167,10 @@ export function MorseBoard({
         cx={VIEW_W / 2}
         cy={BTN_CY}
         r={BTN_R}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-        onMouseDown={onMouseDown}
-        onMouseUp={onMouseUp}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerCancel}
+        onPointerLeave={onPointerLeave}
       />
     </svg>
   )
