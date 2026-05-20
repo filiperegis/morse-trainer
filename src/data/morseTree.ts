@@ -27,43 +27,52 @@ interface NodeDef {
   dashChild?: string
 }
 
+// 7-column × 7-row grid
+// Column x: col1=35  col2=90  col3=148  [antenna@200]  col4=252  col5=308  col6=358  col7=390
+// Row    y: row1=90  row2=155  row3=220  row4=285  row5=350  row6=415  row7=480
 const NODE_DEFS: NodeDef[] = [
   // ROOT (antenna terminal — no LED)
   { letter: 'ROOT', code: '', x: 200, y: 55, ledType: 'none', dotChild: 'E', dashChild: 'T' },
 
-  // TOP ROW y=90
-  { letter: 'E', code: '.', x: 260, y: 90, ledType: 'circle', dotChild: 'I', dashChild: 'A' },
-  { letter: 'T', code: '-', x: 138, y: 90, ledType: 'rect-h', dotChild: 'N', dashChild: 'M' },
-  { letter: 'I', code: '..', x: 315, y: 90, ledType: 'circle', dotChild: 'S', dashChild: 'U' },
-  { letter: 'S', code: '...', x: 358, y: 90, ledType: 'circle', dotChild: 'H', dashChild: 'V' },
-  { letter: 'H', code: '....', x: 390, y: 90, ledType: 'circle' },
-  { letter: 'M', code: '--', x: 75, y: 90, ledType: 'rect-h', dotChild: 'G', dashChild: 'O' },
-  { letter: 'Q', code: '--.-', x: 22, y: 90, ledType: 'rect-h' },
+  // Column 1  (x=35)
+  { letter: 'O', code: '---',  x: 35,  y: 90,  ledType: 'rect-h' },
+  { letter: 'Q', code: '--.-', x: 35,  y: 155, ledType: 'rect-h' },
+  { letter: 'Y', code: '-.--', x: 35,  y: 285, ledType: 'rect-h' },
 
-  // LEVEL 2
-  { letter: 'A', code: '.-', x: 260, y: 148, ledType: 'rect-h', dotChild: 'R', dashChild: 'W' },
-  { letter: 'N', code: '-.', x: 155, y: 148, ledType: 'circle', dotChild: 'D', dashChild: 'K' },
-  { letter: 'O', code: '---', x: 38, y: 148, ledType: 'rect-h' },
-  { letter: 'G', code: '--.', x: 75, y: 155, ledType: 'circle', dotChild: 'Z', dashChild: 'Q' },
-  { letter: 'U', code: '..-', x: 315, y: 155, ledType: 'rect-v', dotChild: 'F' },
-  { letter: 'V', code: '...-', x: 358, y: 148, ledType: 'rect-h' },
+  // Column 2  (x=90)
+  { letter: 'M', code: '--',   x: 90,  y: 90,  ledType: 'rect-h', dotChild: 'G', dashChild: 'O' },
+  { letter: 'G', code: '--.',  x: 90,  y: 155, ledType: 'circle',  dotChild: 'Z', dashChild: 'Q' },
+  { letter: 'Z', code: '--..',  x: 90,  y: 220, ledType: 'circle' },
+  { letter: 'K', code: '-.-',  x: 90,  y: 285, ledType: 'rect-h', dotChild: 'C', dashChild: 'Y' },
+  { letter: 'C', code: '-.-.',  x: 90,  y: 350, ledType: 'circle' },
+  { letter: 'X', code: '-..-', x: 90,  y: 415, ledType: 'rect-h' },
 
-  // LEVEL 3
-  { letter: 'R', code: '.-.', x: 260, y: 210, ledType: 'circle', dotChild: 'L' },
-  { letter: 'W', code: '.--', x: 292, y: 210, ledType: 'rect-h', dotChild: 'P', dashChild: 'J' },
-  { letter: 'D', code: '-..', x: 135, y: 210, ledType: 'circle', dotChild: 'B', dashChild: 'X' },
-  { letter: 'K', code: '-.-', x: 175, y: 210, ledType: 'rect-h', dotChild: 'C', dashChild: 'Y' },
-  { letter: 'Z', code: '--..', x: 52, y: 212, ledType: 'circle' },
-  { letter: 'F', code: '..-.',  x: 315, y: 210, ledType: 'circle' },
-  { letter: 'Y', code: '-.--', x: 198, y: 210, ledType: 'rect-h' },
+  // Column 3  (x=148)
+  { letter: 'T', code: '-',    x: 148, y: 90,  ledType: 'rect-h', dotChild: 'N', dashChild: 'M' },
+  { letter: 'N', code: '-.',   x: 148, y: 285, ledType: 'circle',  dotChild: 'D', dashChild: 'K' },
+  { letter: 'D', code: '-..',  x: 148, y: 415, ledType: 'circle',  dotChild: 'B', dashChild: 'X' },
+  { letter: 'B', code: '-...', x: 148, y: 480, ledType: 'circle' },
 
-  // LEVEL 4
-  { letter: 'L', code: '.-..', x: 260, y: 268, ledType: 'circle' },
-  { letter: 'P', code: '.--.',  x: 282, y: 268, ledType: 'circle' },
-  { letter: 'J', code: '.---', x: 305, y: 268, ledType: 'rect-v' },
-  { letter: 'B', code: '-...', x: 112, y: 268, ledType: 'circle' },
-  { letter: 'X', code: '-..-', x: 150, y: 265, ledType: 'rect-h' },
-  { letter: 'C', code: '-.-.', x: 162, y: 268, ledType: 'circle' },
+  // Column 4  (x=252)
+  { letter: 'E', code: '.',    x: 252, y: 90,  ledType: 'circle',  dotChild: 'I', dashChild: 'A' },
+  { letter: 'A', code: '.-',   x: 252, y: 285, ledType: 'rect-h',  dotChild: 'R', dashChild: 'W' },
+  { letter: 'W', code: '.--',  x: 252, y: 415, ledType: 'rect-h',  dotChild: 'P', dashChild: 'J' },
+  { letter: 'J', code: '.---', x: 252, y: 480, ledType: 'rect-v' },
+
+  // Column 5  (x=308)
+  { letter: 'I', code: '..',   x: 308, y: 90,  ledType: 'circle',  dotChild: 'S', dashChild: 'U' },
+  { letter: 'U', code: '..-',  x: 308, y: 155, ledType: 'rect-v',  dotChild: 'F' },
+  { letter: 'F', code: '..-.',  x: 308, y: 220, ledType: 'circle' },
+  { letter: 'R', code: '.-.',  x: 308, y: 285, ledType: 'circle',  dotChild: 'L' },
+  { letter: 'P', code: '.--.',  x: 308, y: 415, ledType: 'circle' },
+
+  // Column 6  (x=358)
+  { letter: 'S', code: '...',  x: 358, y: 90,  ledType: 'circle',  dotChild: 'H', dashChild: 'V' },
+  { letter: 'V', code: '...-', x: 358, y: 155, ledType: 'rect-h' },
+  { letter: 'L', code: '.-..',  x: 358, y: 285, ledType: 'circle' },
+
+  // Column 7  (x=390)
+  { letter: 'H', code: '....', x: 390, y: 90,  ledType: 'circle' },
 ]
 
 // Build node map
@@ -93,46 +102,59 @@ export const ALL_NODES: MorseNode[] = NODE_DEFS.filter(d => d.letter !== 'ROOT')
 )
 
 export const TRACES: TraceData[] = [
-  // ROOT connections
-  { id: 'ROOT-T', points: [[200,55],[138,55],[138,90]], childLetter: 'T' },
-  { id: 'ROOT-E', points: [[200,55],[260,55],[260,90]], childLetter: 'E' },
-  // T branch
-  { id: 'T-M', points: [[138,90],[75,90]], childLetter: 'M' },
-  { id: 'T-N', points: [[138,90],[138,148],[155,148]], childLetter: 'N' },
-  // M branch
-  { id: 'M-O', points: [[75,90],[75,148],[38,148]], childLetter: 'O' },
-  { id: 'M-G', points: [[75,90],[75,155]], childLetter: 'G' },
-  // G branch
-  { id: 'G-Z', points: [[75,155],[75,212],[52,212]], childLetter: 'Z' },
-  { id: 'G-Q', points: [[75,155],[22,155],[22,90]], childLetter: 'Q' },
-  // N branch
-  { id: 'N-D', points: [[155,148],[155,210],[135,210]], childLetter: 'D' },
-  { id: 'N-K', points: [[155,148],[155,210],[175,210]], childLetter: 'K' },
-  // D branch
-  { id: 'D-B', points: [[135,210],[135,268],[112,268]], childLetter: 'B' },
-  { id: 'D-X', points: [[135,210],[135,265],[150,265]], childLetter: 'X' },
-  // K branch
-  { id: 'K-C', points: [[175,210],[175,268],[162,268]], childLetter: 'C' },
-  { id: 'K-Y', points: [[175,210],[198,210]], childLetter: 'Y' },
-  // E branch
-  { id: 'E-I', points: [[260,90],[315,90]], childLetter: 'I' },
-  { id: 'E-A', points: [[260,90],[260,148]], childLetter: 'A' },
-  // I branch
-  { id: 'I-S', points: [[315,90],[358,90]], childLetter: 'S' },
-  { id: 'I-U', points: [[315,90],[315,155]], childLetter: 'U' },
-  // S branch
-  { id: 'S-H', points: [[358,90],[390,90]], childLetter: 'H' },
-  { id: 'S-V', points: [[358,90],[358,148]], childLetter: 'V' },
-  // A branch
-  { id: 'A-R', points: [[260,148],[260,210]], childLetter: 'R' },
-  { id: 'A-W', points: [[260,148],[292,148],[292,210]], childLetter: 'W' },
-  // R branch
-  { id: 'R-L', points: [[260,210],[260,268]], childLetter: 'L' },
-  // W branch
-  { id: 'W-P', points: [[292,210],[292,268],[282,268]], childLetter: 'P' },
-  { id: 'W-J', points: [[292,210],[292,268],[305,268]], childLetter: 'J' },
-  // U branch
-  { id: 'U-F', points: [[315,155],[315,210]], childLetter: 'F' },
+  // ROOT → vertical trunk down to row1, then branch left/right
+  { id: 'ROOT-T', points: [[200,55],[200,90],[148,90]], childLetter: 'T' },
+  { id: 'ROOT-E', points: [[200,55],[200,90],[252,90]], childLetter: 'E' },
+
+  // T (col3 row1)
+  { id: 'T-M', points: [[148,90],[90,90]],   childLetter: 'M' },   // dash → left
+  { id: 'T-N', points: [[148,90],[148,285]], childLetter: 'N' },   // dot  → down
+
+  // M (col2 row1)
+  { id: 'M-O', points: [[90,90],[35,90]],    childLetter: 'O' },   // dash → left
+  { id: 'M-G', points: [[90,90],[90,155]],   childLetter: 'G' },   // dot  → down
+
+  // G (col2 row2)
+  { id: 'G-Z', points: [[90,155],[90,220]],  childLetter: 'Z' },   // dot  → down
+  { id: 'G-Q', points: [[90,155],[35,155]],  childLetter: 'Q' },   // dash → left
+
+  // N (col3 row4)
+  { id: 'N-D', points: [[148,285],[148,415]], childLetter: 'D' },  // dot  → down
+  { id: 'N-K', points: [[148,285],[90,285]],  childLetter: 'K' },  // dash → left
+
+  // K (col2 row4)
+  { id: 'K-C', points: [[90,285],[90,350]],  childLetter: 'C' },   // dot  → down
+  { id: 'K-Y', points: [[90,285],[35,285]],  childLetter: 'Y' },   // dash → left
+
+  // D (col3 row6)
+  { id: 'D-B', points: [[148,415],[148,480]], childLetter: 'B' },  // dot  → down
+  { id: 'D-X', points: [[148,415],[90,415]],  childLetter: 'X' },  // dash → left
+
+  // E (col4 row1)
+  { id: 'E-I', points: [[252,90],[308,90]],  childLetter: 'I' },   // dot  → right
+  { id: 'E-A', points: [[252,90],[252,285]], childLetter: 'A' },   // dash → down
+
+  // I (col5 row1)
+  { id: 'I-S', points: [[308,90],[358,90]],  childLetter: 'S' },   // dot  → right
+  { id: 'I-U', points: [[308,90],[308,155]], childLetter: 'U' },   // dash → down
+
+  // S (col6 row1)
+  { id: 'S-H', points: [[358,90],[390,90]],  childLetter: 'H' },   // dot  → right
+  { id: 'S-V', points: [[358,90],[358,155]], childLetter: 'V' },   // dash → down
+
+  // U (col5 row2)
+  { id: 'U-F', points: [[308,155],[308,220]], childLetter: 'F' },  // dot  → down
+
+  // A (col4 row4)
+  { id: 'A-R', points: [[252,285],[308,285]], childLetter: 'R' },  // dot  → right
+  { id: 'A-W', points: [[252,285],[252,415]], childLetter: 'W' },  // dash → down
+
+  // R (col5 row4)
+  { id: 'R-L', points: [[308,285],[358,285]], childLetter: 'L' },  // dot  → right
+
+  // W (col4 row6)
+  { id: 'W-P', points: [[252,415],[308,415]], childLetter: 'P' },  // dot  → right
+  { id: 'W-J', points: [[252,415],[252,480]], childLetter: 'J' },  // dash → down
 ]
 
 /** Get the letter node for a given Morse code string */
