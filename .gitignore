@@ -1,1 +1,20 @@
-node_modules
+# Ignore node_modules
+node_modules/
+
+# Ignore Playwright test results
+.playwright-mcp/
+
+# What else should be in .gitignore
+# Ignore build output
+dist/
+
+# Ignore local environment variables
+.env.local
+.env
+
+# Ignore logs
+*.log
+
+# Ignore IDE files
+.vscode/
+

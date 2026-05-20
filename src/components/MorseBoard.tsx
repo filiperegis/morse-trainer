@@ -17,10 +17,10 @@ interface MorseBoardProps {
 }
 
 const VIEW_W = 400
-const VIEW_H = 700
-const BOARD_H = 530
+const VIEW_H = 725
+const BOARD_H = 555
 const BTN_CX = 200
-const BTN_CY = 608
+const BTN_CY = 633
 const BTN_R = 38
 
 export function MorseBoard({
@@ -64,7 +64,9 @@ export function MorseBoard({
           </feMerge>
         </filter>
         {/* Active trace glow */}
-        <filter id="traceGlow" x="-20%" y="-20%" width="140%" height="140%">
+        {/* filterUnits="userSpaceOnUse" + absolute coords so the filter region never
+            collapses for zero-width or zero-height elements (straight 2-point lines) */}
+        <filter id="traceGlow" filterUnits="userSpaceOnUse" x="-10" y="-10" width="420" height="720">
           <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
@@ -116,8 +118,10 @@ export function MorseBoard({
         MORSE CODE TRAINER
       </text>
 
-      {/* Antenna at top-center */}
-      <AntennaSymbol cx={200} cy={55} />
+      {/* Inner content shifted down 25px to give the title a clear box */}
+      <g transform="translate(0, 25)">
+        <AntennaSymbol cx={200} cy={55} />
+      </g>
 
       {/* Wireless symbol at bottom of board */}
       <g stroke="#c8941a" strokeWidth="1.5" fill="none" strokeOpacity="0.6">
@@ -126,18 +130,18 @@ export function MorseBoard({
         <path d={`M ${VIEW_W/2 - 20},${BOARD_H - 34} A 22 22 0 0 1 ${VIEW_W/2 + 20},${BOARD_H - 34}`} />
       </g>
 
-      {/* Traces */}
-      <MorseTraces traces={TRACES} activeTraceIds={activeTraceIds} />
-
-      {/* LEDs */}
-      {ALL_NODES.map(node => (
-        <MorseLED
-          key={node.letter}
-          node={node}
-          active={activePath.has(node.letter)}
-          confirmed={isConfirmed && confirmedLetter === node.letter}
-        />
-      ))}
+      {/* Traces + LEDs shifted down 25px (same transform group as antenna) */}
+      <g transform="translate(0, 25)">
+        <MorseTraces traces={TRACES} activeTraceIds={activeTraceIds} />
+        {ALL_NODES.map(node => (
+          <MorseLED
+            key={node.letter}
+            node={node}
+            active={activePath.has(node.letter)}
+            confirmed={isConfirmed && confirmedLetter === node.letter}
+          />
+        ))}
+      </g>
 
       {/* Divider between board and controls */}
       <line

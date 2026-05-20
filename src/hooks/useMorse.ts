@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback } from 'react'
 import { getNodeByCode } from '../data/morseTree'
 
-export const LETTER_TIMEOUT = 1200
+export const LETTER_TIMEOUT = 2000
 export const CONFIRMED_DISPLAY_DURATION = 800
 
 interface MorseState {

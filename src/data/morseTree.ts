@@ -58,11 +58,11 @@ const NODE_DEFS: NodeDef[] = [
   { letter: 'E', code: '.',    x: 252, y: 90,  ledType: 'circle',  dotChild: 'I', dashChild: 'A' },
   { letter: 'A', code: '.-',   x: 252, y: 285, ledType: 'rect-h',  dotChild: 'R', dashChild: 'W' },
   { letter: 'W', code: '.--',  x: 252, y: 415, ledType: 'rect-h',  dotChild: 'P', dashChild: 'J' },
-  { letter: 'J', code: '.---', x: 252, y: 480, ledType: 'rect-v' },
+  { letter: 'J', code: '.---', x: 252, y: 480, ledType: 'rect-h' },
 
   // Column 5  (x=308)
   { letter: 'I', code: '..',   x: 308, y: 90,  ledType: 'circle',  dotChild: 'S', dashChild: 'U' },
-  { letter: 'U', code: '..-',  x: 308, y: 155, ledType: 'rect-v',  dotChild: 'F' },
+  { letter: 'U', code: '..-',  x: 308, y: 155, ledType: 'rect-h',  dotChild: 'F' },
   { letter: 'F', code: '..-.',  x: 308, y: 220, ledType: 'circle' },
   { letter: 'R', code: '.-.',  x: 308, y: 285, ledType: 'circle',  dotChild: 'L' },
   { letter: 'P', code: '.--.',  x: 308, y: 415, ledType: 'circle' },
