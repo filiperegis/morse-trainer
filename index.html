@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+    <!-- PWA -->
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="description" content="Practice Morse code on a virtual PCB trainer board" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Morse" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/morse-trainer/icon.svg" />
+    <link rel="apple-touch-icon" href="/morse-trainer/pwa-192x192.png" />
+
+    <!-- Prevent text selection and callout on iOS -->
+    <style>
+      html { -webkit-touch-callout: none; }
+    </style>
+
+    <title>Morse Code Trainer</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

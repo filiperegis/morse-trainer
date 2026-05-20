@@ -1,0 +1,174 @@
+import { ALL_NODES, TRACES, getActivePath, getActiveTraces } from '../data/morseTree'
+import { AntennaSymbol } from './AntennaSymbol'
+import { MorseLED } from './MorseLED'
+import { MorseTraces } from './MorseTraces'
+import { TransmitButton } from './TransmitButton'
+import { LetterDisplay } from './LetterDisplay'
+
+interface MorseBoardProps {
+  sequence: string
+  confirmedLetter: string
+  isConfirmed: boolean
+  isPressed: boolean
+  onTouchStart: (e: React.TouchEvent) => void
+  onTouchEnd: (e: React.TouchEvent) => void
+  onMouseDown: (e: React.MouseEvent) => void
+  onMouseUp: (e: React.MouseEvent) => void
+}
+
+const VIEW_W = 400
+const VIEW_H = 700
+const BOARD_H = 530
+const BTN_CX = 200
+const BTN_CY = 608
+const BTN_R = 38
+
+export function MorseBoard({
+  sequence,
+  confirmedLetter,
+  isConfirmed,
+  isPressed,
+  onTouchStart,
+  onTouchEnd,
+  onMouseDown,
+  onMouseUp,
+}: MorseBoardProps) {
+  const activePath = new Set(getActivePath(sequence))
+  const activeTraceIds = getActiveTraces(sequence)
+
+  return (
+    <svg
+      viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+      preserveAspectRatio="xMidYMid meet"
+      style={{ width: '100%', height: '100%', background: '#0a0a0a' }}
+    >
+      <defs>
+        {/* Green LED glow */}
+        <filter id="greenGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feFlood floodColor="#00ff44" result="flood" />
+          <feComposite in="flood" in2="SourceGraphic" operator="in" result="coloredSrc" />
+          <feGaussianBlur in="coloredSrc" stdDeviation="4" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        {/* Orange LED glow */}
+        <filter id="orangeGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feFlood floodColor="#ff8c00" result="flood" />
+          <feComposite in="flood" in2="SourceGraphic" operator="in" result="coloredSrc" />
+          <feGaussianBlur in="coloredSrc" stdDeviation="4" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        {/* Active trace glow */}
+        <filter id="traceGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        {/* Confirmed letter flash */}
+        <filter id="confirmedFlash" x="-10%" y="-10%" width="120%" height="120%">
+          <feColorMatrix type="saturate" values="3" />
+        </filter>
+        {/* Button radial gradient */}
+        <radialGradient id="btnGradient" cx="50%" cy="35%" r="65%">
+          <stop offset="0%" stopColor="#2a2a2a" />
+          <stop offset="100%" stopColor="#0a0a0a" />
+        </radialGradient>
+      </defs>
+
+      {/* PCB Board background */}
+      <rect x="0" y="0" width={VIEW_W} height={VIEW_H} fill="#0a0a0a" />
+      <rect x="4" y="4" width={VIEW_W - 8} height={BOARD_H - 4} rx="0" fill="#111111" />
+
+      {/* PCB border */}
+      <rect
+        x="4" y="4"
+        width={VIEW_W - 8}
+        height={BOARD_H - 4}
+        fill="none"
+        stroke="#c8941a"
+        strokeWidth="1"
+        strokeOpacity="0.4"
+      />
+
+      {/* Corner mounting holes */}
+      {[[16,16],[VIEW_W-16,16],[16,BOARD_H-12],[VIEW_W-16,BOARD_H-12]].map(([hx,hy], i) => (
+        <circle key={i} cx={hx} cy={hy} r="4" fill="#0a0a0a" stroke="#c8941a" strokeWidth="1" strokeOpacity="0.5" />
+      ))}
+
+      {/* Header */}
+      <text
+        x={VIEW_W / 2}
+        y="20"
+        textAnchor="middle"
+        dominantBaseline="hanging"
+        fontSize="11"
+        fontFamily="'Courier New', monospace"
+        fill="#c8941a"
+        letterSpacing="3"
+      >
+        MORSE CODE TRAINER
+      </text>
+
+      {/* Antenna at top-center */}
+      <AntennaSymbol cx={200} cy={55} />
+
+      {/* Wireless symbol at bottom of board */}
+      <g stroke="#c8941a" strokeWidth="1.5" fill="none" strokeOpacity="0.6">
+        <circle cx={VIEW_W / 2} cy={BOARD_H - 20} r="6" />
+        <path d={`M ${VIEW_W/2 - 12},${BOARD_H - 28} A 14 14 0 0 1 ${VIEW_W/2 + 12},${BOARD_H - 28}`} />
+        <path d={`M ${VIEW_W/2 - 20},${BOARD_H - 34} A 22 22 0 0 1 ${VIEW_W/2 + 20},${BOARD_H - 34}`} />
+      </g>
+
+      {/* Traces */}
+      <MorseTraces traces={TRACES} activeTraceIds={activeTraceIds} />
+
+      {/* LEDs */}
+      {ALL_NODES.map(node => (
+        <MorseLED
+          key={node.letter}
+          node={node}
+          active={activePath.has(node.letter)}
+          confirmed={isConfirmed && confirmedLetter === node.letter}
+        />
+      ))}
+
+      {/* Divider between board and controls */}
+      <line
+        x1="4" y1={BOARD_H}
+        x2={VIEW_W - 4} y2={BOARD_H}
+        stroke="#c8941a"
+        strokeWidth="1"
+        strokeOpacity="0.3"
+      />
+
+      {/* Display area */}
+      <LetterDisplay
+        sequence={sequence}
+        confirmedLetter={confirmedLetter}
+        isConfirmed={isConfirmed}
+        x={VIEW_W / 2}
+        y={BOARD_H + 10}
+        width={180}
+      />
+
+      {/* Transmit button */}
+      <TransmitButton
+        isPressed={isPressed}
+        cx={BTN_CX}
+        cy={BTN_CY}
+        r={BTN_R}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+      />
+    </svg>
+  )
+}
