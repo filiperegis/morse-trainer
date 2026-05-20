@@ -19,7 +19,6 @@ interface MorseBoardProps {
 const VIEW_W = 400
 const VIEW_H = 725
 const BOARD_H = 555
-const BTN_CX = 200
 const BTN_CY = 633
 const BTN_R = 38
 
