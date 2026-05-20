@@ -6,7 +6,6 @@ interface MorseTracesProps {
 }
 
 export function MorseTraces({ traces, activeTraceIds }: MorseTracesProps) {
-    console.log('Rendering MorseTraces with activeTraceIds:', Array.from(activeTraceIds))
     return (
         <g>
             {/* Base layer: all traces in stable order — React only updates attributes, never moves nodes */}
