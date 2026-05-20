@@ -18,3 +18,18 @@ html, body, #root {
 svg {
   display: block;
 }
+
+.app {
+  width: 100vw;
+  height: 100dvh;
+
+  padding:
+    calc(env(safe-area-inset-top) + 16px)
+    calc(env(safe-area-inset-right) + 16px)
+    calc(env(safe-area-inset-bottom) + 16px)
+    calc(env(safe-area-inset-left) + 16px);
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}

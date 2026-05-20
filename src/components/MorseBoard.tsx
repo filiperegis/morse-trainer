@@ -158,14 +158,14 @@ export function MorseBoard({
         confirmedLetter={confirmedLetter}
         isConfirmed={isConfirmed}
         x={VIEW_W / 2}
-        y={BOARD_H + 10}
-        width={180}
+        y={BOARD_H / 3}
+        width={80}
       />
 
       {/* Transmit button */}
       <TransmitButton
         isPressed={isPressed}
-        cx={BTN_CX}
+        cx={VIEW_W / 2}
         cy={BTN_CY}
         r={BTN_R}
         onTouchStart={onTouchStart}

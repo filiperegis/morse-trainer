@@ -28,17 +28,7 @@ export default function App() {
   })
 
   return (
-    <div
-      style={{
-        width: '100dvw',
-        height: '100dvh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '#0a0a0a',
-        overflow: 'hidden',
-      }}
-    >
+    <div className="app">
       <MorseBoard
         sequence={sequence}
         confirmedLetter={confirmedLetter}

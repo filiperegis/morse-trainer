@@ -23,8 +23,8 @@ export function LetterDisplay({ sequence, confirmedLetter, isConfirmed, x, y, wi
         width={width}
         height={height}
         fill="#0d0d0d"
-        stroke={isConfirmed ? '#ffd700' : '#c8941a'}
-        strokeWidth={isConfirmed ? 2 : 1}
+        // stroke={isConfirmed ? '#ffd700' : '#c8941a'}
+        // strokeWidth={isConfirmed ? 2 : 1}
         strokeOpacity="0.8"
         filter={isConfirmed ? 'url(#confirmedFlash)' : undefined}
       />
@@ -48,7 +48,7 @@ export function LetterDisplay({ sequence, confirmedLetter, isConfirmed, x, y, wi
           y={top + 62}
           textAnchor="middle"
           dominantBaseline="middle"
-          fontSize="48"
+          fontSize="32"
           fontFamily="'Courier New', monospace"
           fontWeight="bold"
           fill="#ffd700"
